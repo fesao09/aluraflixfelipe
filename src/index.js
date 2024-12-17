@@ -1,19 +1,18 @@
+// src/index.js
 import React from 'react';
-import ReactDOM from 'react-dom/client'; // Atualizado para React 18
-import { BrowserRouter } from 'react-router-dom';
-import App from './App';
-import ErrorBoundary from './ErrorBoundary';
+import ReactDOM from 'react-dom/client';
 import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from 'react-router-dom';
 
-// Criação da raiz
 const root = ReactDOM.createRoot(document.getElementById('root'));
-
 root.render(
   <React.StrictMode>
-    <ErrorBoundary>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ErrorBoundary>
+    <BrowserRouter> {/* Certifique-se de que o BrowserRouter esteja aqui */}
+      <App />
+    </BrowserRouter>
   </React.StrictMode>
 );
+
+reportWebVitals();

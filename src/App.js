@@ -1,21 +1,33 @@
+// src/App.js
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Banner from './components/Banner';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import VideoDetails from './components/VideoDetails';
+import Categorias from './components/Categorias';
+import { CorProvider } from './Contexto/CorContexto';
+import SearchBar from './components/SearchBar';
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <Routes>
-        <Route path="/" element={<Banner />} />
-        {/* Adicione outras rotas aqui, se necessário */}
-      </Routes>
-      <Footer />
-    </div>
+    <CorProvider>
+        <div className="App">
+          <Header />
+          <SearchBar />
+          <Routes>
+            <Route path="/" element={ 
+              <>
+                <Banner />
+                <Categorias /> 
+              </>
+            } />
+            <Route path="/videos/:id" element={<VideoDetails />} />
+          </Routes>
+          <Footer />
+        </div>
+    </CorProvider>
   );
 }
 
 export default App;
-

@@ -1,10 +1,9 @@
-// src/Contexto/CorContexto.js
-import React, { createContext, useState } from 'react';
+import { createContext, useState } from 'react';
 
-export const CorContexto = createContext({ corFundo: '#2A7AE4', setCorFundo: () => {} }); // Define um valor padrão para o contexto
+export const CorContexto = createContext({ corFundo: '#2A7AE4', setCorFundo: () => {} });
 
 export function CorProvider({ children }) {
-  const [corFundo, setCorFundo] = useState('#2A7AE4'); // Define a cor inicial
+  const [corFundo, setCorFundo] = useState('#2A7AE4');
 
   return (
     <CorContexto.Provider value={{ corFundo, setCorFundo }}>

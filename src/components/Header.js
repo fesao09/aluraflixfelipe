@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { CorContexto } from '../Contexto/CorContexto'; // Importe o contexto de cor
+import { CorContexto } from '../Contexto/CorContexto';
 
 const HeaderContainer = styled.header`
-  background-color: ${({ corFundo }) => corFundo}; // Use a cor do contexto
+  background-color: ${({ corFundo }) => corFundo};
   padding: 20px 40px;
   display: flex;
   align-items: center;
@@ -36,7 +36,7 @@ const HeaderContainer = styled.header`
 `;
 
 function Header() {
-  const { corFundo } = useContext(CorContexto); // Acesse o contexto de cor
+  const { corFundo } = useContext(CorContexto); // useContext dentro da função
 
   return (
     <HeaderContainer corFundo={corFundo}>
@@ -46,10 +46,10 @@ function Header() {
       <nav>
         <ul>
           <li>
-            <Link to="/">Início</Link> {/* Link para a página inicial */}
+            <Link to="/">Início</Link>
           </li>
           <li>
-            <Link to="/favoritos">Favoritos</Link> {/* Link para a página de favoritos */}
+            <Link to="/favoritos">Favoritos</Link>
           </li>
         </ul>
       </nav>

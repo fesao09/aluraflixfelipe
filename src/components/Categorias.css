@@ -1,0 +1,25 @@
+/* src/components/Categorias.css */
+.categorias {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .categorias h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  .videos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .videos img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+  

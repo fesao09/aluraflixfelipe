@@ -1,18 +1,14 @@
 {
-<<<<<<< HEAD
   "short_name": "Aluraflix",
   "name": "Aluraflix",
-=======
   "short_name": "React App",
   "name": "Create React App Sample",
->>>>>>> 8d5f6d74b596a7066b773a80e0861a9124bfecdf
+
   "icons": [
     {
       "src": "favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
-<<<<<<< HEAD
-=======
     },
     {
       "src": "logo192.png",
@@ -23,15 +19,13 @@
       "src": "logo512.png",
       "type": "image/png",
       "sizes": "512x512"
->>>>>>> 8d5f6d74b596a7066b773a80e0861a9124bfecdf
     }
   ],
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"
-<<<<<<< HEAD
 }
-=======
+
 }
->>>>>>> 8d5f6d74b596a7066b773a80e0861a9124bfecdf
+

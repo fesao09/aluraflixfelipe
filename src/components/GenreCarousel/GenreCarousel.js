@@ -1,27 +1,30 @@
 // src/components/GenreCarousel/GenreCarousel.js
 
 import React from 'react';
-import { CarouselContainer, GenreTitle, VideoListContainer, VideoCard } from './GenreCarousel.styles';
+import { CarouselContainer, GenreTitle, VideoList, VideoItem } from './GenreCarousel.styles';
 
 const GenreCarousel = ({ genres, openModal }) => {
+  if (!genres || genres.length === 0) {
+    return <p>No genres available</p>;
+  }
+
   return (
     <CarouselContainer>
       {genres.map((genre) => (
-        <div key={genre.name}>
+        <div key={genre.id}>
           <GenreTitle>{genre.name}</GenreTitle>
-          <VideoListContainer>
-            {genre.videos.map((video, index) => (
-              <VideoCard key={`${genre.name}-${video.id}-${index}`} onClick={() => openModal(video)}>
-                {video.image ? (
+          <VideoList>
+            {genre.videos && genre.videos.length > 0 ? (
+              genre.videos.map((video) => (
+                <VideoItem key={video.id} onClick={() => openModal(video)}>
                   <img src={video.image} alt={video.title} />
-                ) : (
-                  <div className="video-placeholder">Imagem não disponível</div>
-                )}
-                <div className="video-title">{video.title}</div>
-                <p>{video.description}</p>
-              </VideoCard>
-            ))}
-          </VideoListContainer>
+                  <p>{video.title}</p>
+                </VideoItem>
+              ))
+            ) : (
+              <p>No videos available</p>
+            )}
+          </VideoList>
         </div>
       ))}
     </CarouselContainer>

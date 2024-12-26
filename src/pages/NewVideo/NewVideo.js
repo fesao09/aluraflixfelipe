@@ -1,61 +1,46 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'; // Importando o axios para fazer requisição POST
-import Form from '../../components/Form/Form';
 import { FormWrapper, FormGroup, FormLabel, FormInput, FormSelect, FormButton } from '../../components/Form/Form.styles';
 import { Container, Modal, ModalContent, CloseButton } from './NewVideo.styles'; // Ajuste importações
 
 const NewVideo = ({ initialGenres, setGenres }) => {
-  const [video, setVideo] = useState({
+  const [videoData, setVideoData] = useState({
     title: '',
-    category: '',
-    video: '',
+    description: '',
+    videoUrl: '',
+    genreId: initialGenres[0].id // Default to the first genre
   });
   const [showModal, setShowModal] = useState(false);
   const [modalVideo, setModalVideo] = useState('');
   const navigate = useNavigate();
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setVideoData({ ...videoData, [name]: value });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    // Verifica se a URL do vídeo é válida
-    const videoId = video.video.split('v=')[1];
-    if (!videoId) {
-      console.error('URL do vídeo inválida');
-      return;
-    }
-  
-    // Lógica de envio de dados para o servidor (POST)
-    const newVideo = {
-      title: video.title,
-      description: "Descrição do vídeo", // Você pode atualizar para receber uma descrição do formulário
-      videoUrl: `https://www.youtube.com/embed/${videoId}`,
-      image: `https://img.youtube.com/vi/${videoId}/0.jpg`,
-    };
-  
     try {
-      // Envia o novo vídeo para o backend
-      const response = await axios.post('http://localhost:5001/genres/1/videos', newVideo); // A URL aqui pode ser modificada para enviar de acordo com a categoria selecionada
-  
-      // Atualiza o estado de genres para incluir o novo vídeo no gênero correto
-      setGenres((prevGenres) => {
-        const updatedGenres = prevGenres.map((genre) => {
-          if (genre.name === video.category) { // Verifica qual categoria foi escolhida
-            return {
-              ...genre,
-              videos: [...genre.videos, response.data], // Adiciona o novo vídeo no gênero correto
-            };
-          }
-          return genre;
-        });
-        return updatedGenres;
+      const response = await axios.post('http://localhost:5001/videos', {
+        ...videoData,
+        image: `https://img.youtube.com/vi/${videoData.videoUrl.split('v=')[1]}/0.jpg`
       });
-  
+      console.log(response.data);
+      // Update the genres state with the new video
+      const updatedGenres = initialGenres.map((genre) => {
+        if (genre.id === videoData.genreId) {
+          return { ...genre, videos: [...(genre.videos || []), response.data] };
+        }
+        return genre;
+      });
+      setGenres(updatedGenres);
       navigate('/'); // Redireciona para a home
     } catch (error) {
-      console.error('Erro ao adicionar o vídeo', error);
+      console.error('Erro ao adicionar o vídeo:', error);
     }
-  };  
+  };
 
   const handleImageClick = (videoUrl) => {
     setModalVideo(videoUrl);
@@ -74,46 +59,62 @@ const NewVideo = ({ initialGenres, setGenres }) => {
           <FormInput
             type="text"
             id="title"
-            value={video.title}
-            onChange={(e) => setVideo({ ...video, title: e.target.value })}
+            name="title"
+            value={videoData.title}
+            onChange={handleChange}
             placeholder="Digite o título do vídeo"
           />
         </FormGroup>
 
         <FormGroup>
-          <FormLabel htmlFor="category">Categoria</FormLabel>
-          <FormSelect
-            id="category"
-            value={video.category}
-            onChange={(e) => setVideo({ ...video, category: e.target.value })}
-          >
-            <option value="">Selecione uma categoria</option>
-            <option value="Ação">Ação</option>
-            <option value="Comédia">Comédia</option>
-            <option value="Suspense">Suspense</option>
-          </FormSelect>
+          <FormLabel htmlFor="description">Descrição</FormLabel>
+          <FormInput
+            type="text"
+            id="description"
+            name="description"
+            value={videoData.description}
+            onChange={handleChange}
+            placeholder="Digite a descrição do vídeo"
+          />
         </FormGroup>
 
         <FormGroup>
-          <FormLabel htmlFor="video">Link do vídeo</FormLabel>
+          <FormLabel htmlFor="videoUrl">Link do vídeo</FormLabel>
           <FormInput
             type="text"
-            id="video"
-            value={video.video}
-            onChange={(e) => setVideo({ ...video, video: e.target.value })}
+            id="videoUrl"
+            name="videoUrl"
+            value={videoData.videoUrl}
+            onChange={handleChange}
             placeholder="Insira o link do vídeo"
           />
+        </FormGroup>
+
+        <FormGroup>
+          <FormLabel htmlFor="genreId">Categoria</FormLabel>
+          <FormSelect
+            id="genreId"
+            name="genreId"
+            value={videoData.genreId}
+            onChange={handleChange}
+          >
+            {initialGenres.map((genre) => (
+              <option key={genre.id} value={genre.id}>
+                {genre.name}
+              </option>
+            ))}
+          </FormSelect>
         </FormGroup>
 
         <FormButton type="submit">Salvar</FormButton>
       </FormWrapper>
 
       <div>
-        {video.video && (
+        {videoData.videoUrl && (
           <img
-            src={`https://img.youtube.com/vi/${video.video.split('v=')[1]}/0.jpg`}
+            src={`https://img.youtube.com/vi/${videoData.videoUrl.split('v=')[1]}/0.jpg`}
             alt="Capa do vídeo"
-            onClick={() => handleImageClick(video.video)}
+            onClick={() => handleImageClick(videoData.videoUrl)}
           />
         )}
       </div>

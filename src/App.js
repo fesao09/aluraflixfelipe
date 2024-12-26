@@ -8,6 +8,7 @@ import axios from 'axios';
 
 const initialGenres = [
   {
+    id: 1,
     name: 'Ação',
     videos: [
       {
@@ -22,6 +23,7 @@ const initialGenres = [
     ],
   },
   {
+    id: 2,
     name: 'Comédia',
     videos: [
       { id: 1, title: 'Video 1', description: 'Descrição do Vídeo 1', videoUrl: '', image: 'https://via.placeholder.com/200' },
@@ -30,6 +32,7 @@ const initialGenres = [
     ],
   },
   {
+    id: 3,
     name: 'Suspense',
     videos: [
       { id: 1, title: 'Video 1', description: 'Descrição do Vídeo 1', videoUrl: '', image: 'https://via.placeholder.com/200' },
@@ -57,36 +60,16 @@ function App() {
     fetchGenres();
   }, []); // Executa o efeito apenas uma vez quando o componente é montado
 
-  // useEffect para o evento de toque
-  useEffect(() => {
-    const handleTouchStart = (e) => {
-      // Sua lógica para o evento de toque
-    };
-
-    document.addEventListener('touchstart', handleTouchStart, { passive: true });
-
-    return () => {
-      document.removeEventListener('touchstart', handleTouchStart);
-    };
-  }, []); // Executa apenas uma vez, quando o componente é montado
-
-  // Usar setTimeout dentro de useEffect (ou função)
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      // Alguma operação demorada
-      console.log('Operação demorada completada!');
-    }, 1000);
-
-    // Limpeza do setTimeout
-    return () => clearTimeout(timeoutId);
-  }, []); // Executa uma vez
+  const updateGenres = (newGenres) => {
+    setGenres(newGenres);
+  };
 
   return (
     <Router>
       <GlobalStyles />
       <Routes>
         <Route path="/" element={<Home initialGenres={genres} />} />
-        <Route path="/novo-video" element={<NewVideo initialGenres={genres} setGenres={setGenres} />} />
+        <Route path="/novo-video" element={<NewVideo initialGenres={genres} setGenres={updateGenres} />} />
       </Routes>
     </Router>
   );

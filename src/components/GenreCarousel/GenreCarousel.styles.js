@@ -46,3 +46,25 @@ export const VideoCard = styled.div`
   }
 `;
 
+export const VideoList = styled.div`
+  display: flex;
+  overflow-x: scroll;
+  // ...additional styles...
+`;
+
+export const VideoItem = styled.div`
+  margin-right: 10px;
+  cursor: pointer;
+  // ...additional styles...
+
+  img {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+  }
+
+  p {
+    text-align: center;
+  }
+`;
+

@@ -5,8 +5,8 @@ import Banner from '../../components/Banner/Banner';
 import GenreCarousel from '../../components/GenreCarousel/GenreCarousel';
 import Modal from '../../components/Modal/Modal';
 
-const Home = () => {
-  const [genres, setGenres] = useState([]);
+const Home = ({ initialGenres }) => {
+  const [genres, setGenres] = useState(initialGenres || []);
   const [showModal, setShowModal] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState(null);
 
@@ -14,8 +14,12 @@ const Home = () => {
   const fetchGenres = async () => {
     try {
       const response = await axios.get('http://localhost:5001/genres');
-      console.log(response.data); // Verifique os dados
-      setGenres(response.data); // Atualiza o estado com os dados recebidos
+      const genresWithVideos = response.data.map((genre) => ({
+        ...genre,
+        videos: initialGenres.find((g) => g.id === genre.id)?.videos || []
+      }));
+      console.log(genresWithVideos); // Verifique os dados
+      setGenres(genresWithVideos); // Atualiza o estado com os dados recebidos
     } catch (error) {
       console.error('Erro ao buscar os dados', error);
     }
@@ -24,12 +28,12 @@ const Home = () => {
   // Usando useEffect para carregar os dados ao iniciar o componente
   useEffect(() => {
     fetchGenres();
-  }, []);
+  }, [initialGenres]);
 
   const handleEdit = async (updatedVideo) => {
     try {
       // Envia a atualização via PUT para o JSON Server
-      await axios.put(`http://localhost:5000/genres/1/videos/${updatedVideo.id}`, updatedVideo);
+      await axios.put(`http://localhost:5001/videos/${updatedVideo.id}`, updatedVideo);
       const updatedGenres = genres.map((genre) => ({
         ...genre,
         videos: genre.videos.map((video) =>
@@ -46,7 +50,7 @@ const Home = () => {
   const handleDelete = async (videoId) => {
     try {
       // Exclui o vídeo via DELETE no JSON Server
-      await axios.delete(`http://localhost:5000/genres/1/videos/${videoId}`);
+      await axios.delete(`http://localhost:5001/videos/${videoId}`);
       const updatedGenres = genres.map((genre) => ({
         ...genre,
         videos: genre.videos.filter((video) => video.id !== videoId),

@@ -1,0 +1,43 @@
+{
+    "genres": [
+      {
+        "name": "Ação",
+        "videos": [
+          {
+            "id": 1,
+            "title": "Golaços",
+            "description": "Top 50 golaços",
+            "videoUrl": "https://www.youtube.com/embed/20Sb6jgdHnc",
+            "image": "https://img.youtube.com/vi/20Sb6jgdHnc/0.jpg"
+          },
+          {
+            "id": 2,
+            "title": "Video 2",
+            "description": "Descrição do Vídeo 2",
+            "videoUrl": "",
+            "image": "https://via.placeholder.com/200"
+          }
+        ]
+      },
+      {
+        "name": "Comédia",
+        "videos": [
+          {
+            "id": 1,
+            "title": "Video 1",
+            "description": "Descrição do Vídeo 1",
+            "videoUrl": "",
+            "image": "https://via.placeholder.com/200"
+          },
+          {
+            "id": 2,
+            "title": "Video 2",
+            "description": "Descrição do Vídeo 2",
+            "videoUrl": "",
+            "image": "https://via.placeholder.com/200"
+          }
+        ]
+      }
+    ]
+  }
+  

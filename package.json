@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "new-aluraflix",
   "version": "0.1.0",
   "private": true,
@@ -19,13 +20,26 @@
     "styled-components": "^6.1.13",
     "url": "^0.11.4",
     "util": "^0.12.5"
+=======
+  "name": "aluraflix",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.0.2"
+>>>>>>> 8d5f6d74b596a7066b773a80e0861a9124bfecdf
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+<<<<<<< HEAD
     "eject": "react-scripts eject",
     "server": "json-server --watch db.json --port 5001"
+=======
+    "eject": "react-scripts eject"
+>>>>>>> 8d5f6d74b596a7066b773a80e0861a9124bfecdf
   },
   "eslintConfig": {
     "extends": [
@@ -46,6 +60,15 @@
     ]
   },
   "devDependencies": {
+<<<<<<< HEAD
     "json-server": "^1.0.0-beta.3"
+=======
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
+    "babel-loader": "^9.2.1",
+    "html-webpack-plugin": "^5.6.3",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.2.0"
+>>>>>>> 8d5f6d74b596a7066b773a80e0861a9124bfecdf
   }
 }

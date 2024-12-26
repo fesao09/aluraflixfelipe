@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import GlobalStyles from './styles/Globalstyles';
+import Navbar from './components/Navbar/Navbar'; // Importando o Navbar
 import Home from './pages/Home/Home';
 import NewVideo from './pages/NewVideo/NewVideo';
 import axios from 'axios';
@@ -67,6 +68,7 @@ function App() {
   return (
     <Router>
       <GlobalStyles />
+      <Navbar /> {/* Renderizando o Navbar */}
       <Routes>
         <Route path="/" element={<Home initialGenres={genres} />} />
         <Route path="/novo-video" element={<NewVideo initialGenres={genres} setGenres={updateGenres} />} />

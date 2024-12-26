@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'; // Importando o axios para fazer as requisições
-import Navbar from '../../components/Navbar/Navbar';
 import Banner from '../../components/Banner/Banner';
 import GenreCarousel from '../../components/GenreCarousel/GenreCarousel';
 import Modal from '../../components/Modal/Modal';
@@ -68,7 +67,6 @@ const Home = ({ initialGenres }) => {
 
   return (
     <div>
-      <Navbar />
       <Banner />
       <GenreCarousel genres={genres} openModal={openModal} />
       {showModal && (
